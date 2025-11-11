@@ -1,5 +1,5 @@
 const express=require("express");
-const { get } = require("mongoose");
+
 const app=express();
 
 const port=3000;
@@ -14,7 +14,7 @@ const port=3000;
   
 // });
 // app.use((req,res,next)=>
-//     {
+//  {
 //         console.log("I am 2nd middleware");
 //         next();
     
@@ -22,10 +22,18 @@ const port=3000;
 //     });
 
 
-app.use((req,res,next)=>{
-    console.log(req.method);
+
+app.use("/random",(req,res,next)=>{
+    console.log("i am only for raanodm middleware");
+    next();
 
 });
+app.use("/",(req,res,next)=>
+{
+    console.log('I am only for root path');
+    next();
+});
+
 
 app.get('/',(req,res)=>
 {
@@ -36,9 +44,6 @@ app.get('/random',(req,res)=>
 {
         res.send("hellio ranodm");
 });
-
-
-
 
 app.listen(port,()=>
 {
